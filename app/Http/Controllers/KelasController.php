@@ -48,7 +48,9 @@ class KelasController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $kelas = Kelas::findOrFail($id);
+
+        return view('kelas.detail', compact('kelas'));
     }
 
     /**
@@ -56,7 +58,9 @@ class KelasController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $kelas = Kelas::findOrFail($id);
+
+        return view('kelas.edit', compact('kelas'));
     }
 
     /**
@@ -64,7 +68,17 @@ class KelasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'id_kelas'     => 'required',
+            'kompetensi_keahlian'   => 'required'
+        ]);
+        $kelas = Kelas::findOrFail($id);
+        $kelas->update([
+            'id_kelas' => $request->id_kelas,
+            'kompetensi_keahlian' => $request->kompetensi_keahlian
+        ]);
+
+        return redirect()->route('kelas.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**
@@ -72,6 +86,12 @@ class KelasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $kelas = Kelas::findOrFail($id);
+
+        //delete post
+        $kelas->delete();
+
+        //redirect to index
+        return redirect()->route('kelas.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

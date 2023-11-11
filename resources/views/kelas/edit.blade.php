@@ -1,6 +1,7 @@
 @extends('template.main')
 @section('halaman','Data Kelas')
-@section('title', 'Tambah Kelas')
+
+@section('title', 'Edit Kelas')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -28,12 +29,13 @@
             <div class="container-fluid">
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <form action="{{ route('kelas.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('kelas.update',$kelas->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="form-group">
                                 <label class="font-weight-bold">Kode Kelas</label>
                                 <input type="text" class="form-control @error('id_kelas') is-invalid @enderror"
-                                    name="id_kelas" value="{{ $kelasId }}" readonly>
+                                    name="id_kelas" value="{{ $kelas->id_kelas }}" readonly>
                                 <!-- error message untuk kode kelas -->
                                 @error('id_kelas')
                                     <div class="alert alert-danger mt-2">
@@ -46,7 +48,7 @@
                             <div class="form-group">
                                 <label class="font-weight-bold">Kompetensi Keahlian</label>
                                 <input type="text" class="form-control @error('kompetensi_keahlian') is-invalid @enderror"
-                                    name="kompetensi_keahlian" value="{{ old('kompetensi_keahlian') }}"
+                                    name="kompetensi_keahlian" value="{{ old('kompetensi_keahlian',$kelas->kompetensi_keahlian) }}"
                                     placeholder="Masukkan kompetensi keahlian">
                                 <!-- error message untuk keterangan kelas -->
                                 @error('kompetensi_keahlian')
@@ -56,7 +58,7 @@
                                 @enderror
                             </div>
 
-                            <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
+                            <button type="submit" class="btn btn-md btn-primary">EDIT</button>
                             <button type="reset" class="btn btn-md btn-warning">RESET</button>
 
                         </form>
