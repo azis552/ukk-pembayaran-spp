@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('id_spp')->unique();
             $table->string('tahun',4);
-            $table->integer('11');
+            $table->integer('nominal');
             $table->timestamps();
         });
     }

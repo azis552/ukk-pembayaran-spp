@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Spp extends Model
 {
     use HasFactory;
+    protected $fillable = ['id_spp','tahun','nominal'];
+
+
+    public static function generateIdSpp()
+    {
+        return now()->format('Ymd').rand(1000, 9999);
+    }
 }
