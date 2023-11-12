@@ -1,7 +1,6 @@
 @extends('template.main')
-@section('halaman','Data Kelas')
-
-@section('title', 'Edit Kelas')
+@section('halaman','Data Spp')
+@section('title', 'Tambah Spp')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -29,15 +28,25 @@
             <div class="container-fluid">
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <form action="{{ route('kelas.update',$kelas->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('spp.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            @method('PUT')
                             <div class="form-group">
-                                <label class="font-weight-bold">Kode Kelas</label>
-                                <input type="text" class="form-control @error('id_kelas') is-invalid @enderror"
-                                    name="id_kelas" value="{{ $kelas->id_kelas }}" readonly>
+                                <label class="font-weight-bold">Kode Spp</label>
+                                <input type="text" class="form-control @error('id_spp') is-invalid @enderror"
+                                    name="id_spp" value="{{ $sppId }}" readonly>
                                 <!-- error message untuk kode kelas -->
-                                @error('id_kelas')
+                                @error('id_spp')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold">Tahun</label>
+                                <input type="text" class="form-control @error('tahun') is-invalid @enderror"
+                                    name="tahun" id="tahunSpp" value="{{ old('tahun') }}" >
+                                <!-- error message untuk kode kelas -->
+                                @error('tahun')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
@@ -46,19 +55,20 @@
                             
 
                             <div class="form-group">
-                                <label class="font-weight-bold">Kompetensi Keahlian</label>
-                                <input type="text" class="form-control @error('kompetensi_keahlian') is-invalid @enderror"
-                                    name="kompetensi_keahlian" value="{{ old('kompetensi_keahlian',$kelas->kompetensi_keahlian) }}"
-                                    placeholder="Masukkan kompetensi keahlian">
+                                <label class="font-weight-bold">Nominal</label>
+                                <input type="text" class="form-control @error('nominal') is-invalid @enderror"
+                                    name="nominal" id="nominal" value="{{ old('nominal') }}"
+                                    placeholder="Masukkan Nominal Spp">
                                 <!-- error message untuk keterangan kelas -->
-                                @error('kompetensi_keahlian')
+                                @error('nominal')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
+                            
 
-                            <button type="submit" class="btn btn-md btn-primary">EDIT</button>
+                            <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
                             <button type="reset" class="btn btn-md btn-warning">RESET</button>
 
                         </form>

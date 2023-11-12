@@ -45,8 +45,9 @@
                             <tbody>
                                 @foreach ($spps as $spp)
                                     <tr>
-                                        <td>{{ $spp->id_kelas }}</td>
-                                        <td>{{ $spp->kompetensi_keahlian }}</td>
+                                        <td>{{ $spp->id_spp }}</td>
+                                        <td>{{ $spp->tahun }}</td>
+                                        <td>{{  'Rp '.number_format($spp->nominal, 0, ',', '.')  }}</td>
                                         <td class="text-center">
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?');"action="{{ route('spp.destroy', $spp->id) }}" method="POST">
                                                 <a href="{{ route('spp.show', $spp->id) }}" class="btn btn-sm btn-dark">SHOW</a>

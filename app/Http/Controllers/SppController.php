@@ -21,7 +21,8 @@ class SppController extends Controller
      */
     public function create()
     {
-        //
+        $sppId = Spp::generateIdSpp();
+        return view('spp.create',compact('sppId'));
     }
 
     /**
@@ -29,7 +30,28 @@ class SppController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rupiahInput = $request->input('nominal');
+
+        // Bersihkan nilai dari karakter non-angka
+        $cleanedValue = preg_replace("/[^0-9]/", "", $rupiahInput);
+
+        // Konversi ke tipe data yang sesuai, misalnya integer
+        $nominal = (int) $cleanedValue;
+
+        $this->validate($request, [
+            'id_spp'     => 'required',
+            'tahun'   => 'required',
+            'nominal' => 'required'
+        ]);
+
+        Spp::create([
+            'id_spp'     => $request->id_spp,
+            'tahun'   => $request->tahun,
+            'nominal' => $nominal
+        ]);
+
+        return redirect()->route('spp.index')->with(['success' => 'Data Berhasil Disimpan!']);
+
     }
 
     /**

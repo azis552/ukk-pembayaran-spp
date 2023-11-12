@@ -20,7 +20,7 @@
 <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
-$.widget.bridge('uibutton', $.ui.button)
+    $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -61,26 +61,57 @@ $.widget.bridge('uibutton', $.ui.button)
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 </body>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<!-- JavaScript Bootstrap dan DateTimePicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<!-- Inputmask -->
+<script src="https://rawgit.com/RobinHerbots/Inputmask/5.x/dist/jquery.inputmask.min.js"></script>
 
-    <script>
-        //message with toastr
-        @if(session()->has('success'))
-        
-            toastr.success('{{ session('success') }}', 'BERHASIL!'); 
+<script>
+    //message with toastr
+    @if (session()->has('success'))
 
-        @elseif(session()->has('error'))
+        toastr.success('{{ session('success') }}', 'BERHASIL!');
+    @elseif (session()->has('error'))
 
-            toastr.error('{{ session('error') }}', 'GAGAL!'); 
-            
-        @endif
-    </script>
+        toastr.error('{{ session('error') }}', 'GAGAL!');
+    @endif
+</script>
+
 </html>
 <script>
-    $(function () {
-      $("#tablekelas").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-      }).buttons().container().appendTo('#tablekelas_wrapper .col-md-6:eq(0)');
-      
+    $(function() {
+        $("#tablekelas").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#tablekelas_wrapper .col-md-6:eq(0)');
+
+
+
+        $('#tahunSpp').datepicker({
+            format: "yyyy",
+            viewMode: "years",
+            minViewMode: "years"
+        });
+
+        $('#nominal').inputmask("currency", {
+            prefix: 'Rp ',
+            groupSeparator: '.',
+            alias: 'numeric',
+            autoGroup: true,
+            digits: 0,
+            digitsOptional: false,
+            placeholder: '0',
+            rightAlign: false,
+            oncleared: function() {
+                clearedFunction();
+            }
+        });
     });
-  </script>
+
+    function clearedFunction() {
+        console.log("Inputmask is cleared");
+    }
+</script>
