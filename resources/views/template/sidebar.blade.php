@@ -56,6 +56,22 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href=" {{ route('spp.index')}} " class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Data Spp
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href=" {{ route('siswa.index')}} " class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Data Siswa
+                        </p>
+                    </a>
+                </li>
                 
             </ul>
         </nav>

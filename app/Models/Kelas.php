@@ -15,4 +15,7 @@ class Kelas extends Model
         // Logika pembuatan ID, misalnya 'PRD-YYYYMMDD-XXXX'
         return now()->format('Ymd').rand(1000, 9999);
     }
+    public function siswa(){
+        return $this->belongsTo(Siswa::class);
+    }
 }

@@ -15,4 +15,8 @@ class Spp extends Model
     {
         return now()->format('Ymd').rand(1000, 9999);
     }
+
+    public function siswa(){
+        return $this->belongsTo(Siswa::class);
+    }
 }
